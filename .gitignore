@@ -1,0 +1,35 @@
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# --- Test / Playwright artifacts ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+artifacts/
+test-results/
+playwright-report/
+blob-report/
+screenshots/
+allure-results/
+allure-report/
+reports/
+logs/
+
+# --- Env / secrets (keep real credentials out of git) ---
+.env
+.env.*
+!.env.example
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
+*.swp

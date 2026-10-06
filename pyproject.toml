@@ -1,0 +1,46 @@
+[project]
+name = "automationexercise-api"
+version = "0.1.0"
+description = "KISS requests + pytest API tests for automationexercise.com"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "allure-pytest>=2.15",
+    "faker>=40.0",
+    "jsonschema>=4.23",
+    "pytest>=8.3",
+    "python-dotenv>=1.0",
+    "requests>=2.32",
+]
+
+[dependency-groups]
+dev = ["black>=24.0", "flake8>=7.0"]
+
+# Test project: install dependencies only, do not build a package.
+[tool.uv]
+package = false
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# So `from api.shop_api import ShopApi` works without installing the package.
+pythonpath = ["."]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--alluredir=allure-results",
+    "--clean-alluredir",
+]
+markers = [
+    "smoke: fast happy-path checks",
+    "negative: invalid input / wrong method",
+    "account: creates real accounts (cleaned up after)",
+]
+# Logs: every request/response goes to logs/test_run.log (overwritten each run).
+log_file = "logs/test_run.log"
+log_file_level = "INFO"
+log_file_format = "%(asctime)s %(levelname)-5s %(name)s: %(message)s"
+log_file_date_format = "%Y-%m-%d %H:%M:%S"
